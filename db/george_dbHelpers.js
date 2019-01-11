@@ -10,9 +10,9 @@ db.connect((err) => {
   }
 });
 
-const addProduct = (obj) => {
+const addProduct = (product) => {
   return new Promise((resolve, reject) => {
-    const queryString = `INSERT INTO products (product_title, vendor_name, review_average, review_count, answered_questions, list_price, price, prime, description) VALUES ('${obj.product_title}', '${obj.vendor_name}', ${obj.review_average}, ${obj.review_count}, ${obj.answered_questions}, '${obj.list_price}', '${obj.price}', ${obj.prime}, '${obj.description}')`;
+    const queryString = `INSERT INTO products (product_title, vendor_name, review_average, review_count, answered_questions, list_price, price, prime, description) VALUES ('${product.product_title}', '${product.vendor_name}', ${product.review_average}, ${product.review_count}, ${product.answered_questions}, '${product.list_price}', '${product.price}', ${product.prime}, '${product.description}')`;
     db.query(queryString, (err, res) => {
       if (err) {
         console.log(queryString);
@@ -42,9 +42,9 @@ const addPhoto = (photo) => {
 
 const getProducts = (productID) => {
   return new Promise((resolve, reject) => {
-    const queryString = 'SELECT * FROM products WHERE productID = ?';
+    const queryString = `SELECT * FROM products WHERE productID = ${productID}`;
     const params = [productID];
-    db.client.query(queryString, params, (err, res) => {
+    db.query(queryString, params, (err, res) => {
       if (err) {
         reject(err);
       } else {
@@ -54,33 +54,35 @@ const getProducts = (productID) => {
   });
 };
 
-const deleteReservation = (partySize, dateToReserve, timeToReserve) => {
-	return new Prmise((resolve, reject) => {
-		client.query(`DELETE FROM reservations WHERE reservation.partySize = ${partySize} AND reservation.dateToReserve = ${dateToReserve} AND reservation.timeToReserve = ${timeToReserve}`, (err, res) => {
-			if (err) {
-				reject(err);
-			} else {
-				resolve(res);
-			}
-		})
-	})
-}
+const deleteProducts = (productID) => {
+  return new Promise((resolve, reject) => {
+    db.query(`DELETE FROM products WHERE productID = ${productID}`, (err, res) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(res);
+      }
+    });
+  });
+};
 
-const updateReservation = (reservationID, dateToReserve, timeToReserve, partySize) => {
-	return new Promise((resolve, reject) => {
-		client.query(`UPDATE reservations SET dateToReserve=${dateToReserve}, timeToReserve=${timeToReserve}, partySize=${partySize} WHERE id=${reservationID}`, (err, res) => {
-			if (err) {
-				reject(err);
-			} else {
-				resolve(res);
-			}
-		})
-	})
-}
+const updateProduct = (product, productID) => {
+  return new Promise((resolve, reject) => {
+    db.query(`UPDATE products SET product_title=${product.product_title}, vendor_name=${product.vendor_name}, review_average=${product.review_average}, review_count = ${product.review_count}, answered_questions = ${product.answered_questions}, list_price = ${product.list_price}, price = ${product.price}, description = ${product.description} WHERE productID=${productID}`, (err, res) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(res);
+      }
+    });
+  });
+};
 
 
 module.exports = {
-	addProduct,
+  addProduct,
   getProducts,
   addPhoto,
-}
+  deleteProducts,
+  updateProduct,
+};
