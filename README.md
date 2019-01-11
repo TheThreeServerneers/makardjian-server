@@ -1,6 +1,6 @@
 # Project Name
 
-> Project description
+> SDC Amazon Project
 
 ## Related Projects
 
@@ -41,3 +41,35 @@ From within the root directory:
 npm install
 ```
 
+### CRUD API's
+Create: 
+  app.post(/photos/:productId)
+  app.post(/products/:productId)
+
+--> Sample
+const addProduct = (obj) => {
+  return new Promise((resolve, reject) => {
+    const queryString = `INSERT INTO products (product_title, vendor_name, review_average, review_count, answered_questions, list_price, price, prime, description) VALUES ('${obj.product_title}', '${obj.vendor_name}', ${obj.review_average}, ${obj.review_count}, ${obj.answered_questions}, '${obj.list_price}', '${obj.price}', ${obj.prime}, '${obj.description}')`;
+    db.query(queryString, (err, res) => {
+      if (err) {
+        console.log(queryString);
+        console.log(err);
+        reject(err);
+      } else {
+        resolve(res);
+      }
+    });
+  });
+};
+
+Read: 
+  app.get(/photos/:productId)
+  app.get(/products/:productId)
+
+Update: 
+  app.put(/photos/:productId)
+  app.put(/products/:productId)
+
+Delete:
+  app.delete(/photos/:productId)
+  app.delete(/products/:productId)

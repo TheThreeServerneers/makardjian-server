@@ -1,9 +1,8 @@
-const mysql = require('mysql');
+const pg = require('pg');
 
-const connection = mysql.createConnection({
-  host: '172.17.0.2',
-  user: 'root',
-  password: 'Mightymang0',
+const connection = pg.createConnection({
+  host: 'localhost',
+  user: 'postgres',
   database: 'product_overview',
 });
 

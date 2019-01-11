@@ -1,15 +1,12 @@
 const faker = require('faker');
-// const db = require('./db.js');
 
 
-//  helper functions
-let discount;
 const discountGenerator = (stringPrice) => {
+  let discount;
   let price = Number(stringPrice.slice(1));
   const randomNum = Math.floor(Math.random() * 10) + 1;
   const potentialDiscounts = [0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7];
   const randomIndex = Math.floor(Math.random() * 8);
-
   if (randomNum <= 7) {
     discount = potentialDiscounts[randomIndex];
     const dollarsOff = price * discount;
@@ -20,62 +17,17 @@ const discountGenerator = (stringPrice) => {
   return stringPrice;
 };
 
-
-//  generate a stringified object of a random number of loremIpsum paragraphs
 const descriptionGenerator = () => {
-  const randomNum = Math.floor(Math.random() * 8) + 1;
-  const descriptionArray = [];
 
-  for (let i = 0; i < randomNum; i++) {
-    descriptionArray.push(faker.lorem.paragraph());
-  }
-  return JSON.stringify(descriptionArray);
+  return faker.lorem.paragraph();
 };
 
-//  generate a random average review score between 1 star and five stars
 const reviewAverageGenerator = () => {
   const possibleScores = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
   const randomScore = Math.floor(Math.random() * 9);
   const result = possibleScores[randomScore];
   return result;
 };
-
-
-// //  populate the products table with dynamic faker data
-// for (let i = 0; i < 100; i++) {
-//   discount = null;
-//   const productTitle = `${faker.commerce.productName()}, ${faker.lorem.sentence()}`.slice(0, -1);
-//   const vendorName = faker.company.companyName();
-//   const reviewAverage = reviewAverageGenerator();
-//   const reviewCount = Math.round((Math.random() * 3000));
-//   const answeredQuestions = Math.round((Math.random() * 49) + 1);
-//   const listPrice = faker.commerce.price(15.00, 5000, 2, '$');
-//   const price = discountGenerator(listPrice);
-//   const prime = Math.round(Math.random());
-//   const description = descriptionGenerator();
-
-//   //  build an array record to pass into the db.saveProductRecord function
-//   const record = [productTitle, vendorName, reviewAverage, reviewCount,
-//     answeredQuestions, listPrice, discount, price, prime, description];
-
-//   db.saveProductRecord(record);
-// }
-
-
-//  //////PHOTO GENERATOR///////
-
-// const photoGenerator = (productId) => {
-//   const randomIndex = Math.floor(Math.random() * products.length);
-//   const randomProduct = products[randomIndex]; 
-
-//   for (let j = 0; j < randomProduct.length; j++) {
-//     if (j === 0) {
-//       db.savePhotoRecord(randomProduct[j][0], randomProduct[j][1], productId, 1);
-//     } else {
-//       db.savePhotoRecord(randomProduct[j][0], randomProduct[j][1], productId, 0);
-//     }
-//   }
-// };
 
 const products = [];
 products.push([
@@ -112,17 +64,31 @@ products.push([
   ['https://images-na.ssl-images-amazon.com/images/I/91unmglFkZL._UY879_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/91unmglFkZL._UL1500_.jpg'],
 ]);
 products.push([
-  ['https://images-na.ssl-images-amazon.com/images/I/61xO8iHvHGL._UX679_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/61xO8iHvHGL.UL1000.jpg'],
+  ['https://images-na.svar lsl-images-amazon.com/images/I/61xO8iHvHGL._UX679_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/61xO8iHvHGL.UL1000.jpg'],
   ['https://images-na.ssl-images-amazon.com/images/I/61VqgbO1jeL._UX679_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/61VqgbO1jeL._UL1000_.jpg'],
   ['https://images-na.ssl-images-amazon.com/images/I/61Q2VAxjXDL._UX679_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/61Q2VAxjXDL._UL1000_.jpg'],
   ['https://images-na.ssl-images-amazon.com/images/I/71f0rd1qtWL._UX679_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/71f0rd1qtWL._UL1000_.jpg'],
 ]);
-
-
-// for (let i = 1; i < 101; i++) {
-//   photoGenerator(i);
-// }
-
+products.push([
+  ['https://images-na.ssl-images-amazon.com/images/I/71rNQhd1KUL._SL879_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/71rNQhd1KUL._SL1500_.jpg'],
+  ['https://images-na.ssl-images-amazon.com/images/I/71ZFbBraPwL._SL879_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/71ZFbBraPwL._SL1500_.jpg'],
+  ['https://images-na.ssl-images-amazon.com/images/I/81MqnPUDzML._SL879_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/81MqnPUDzML._SL1500_.jpg'],
+  ['https://images-na.ssl-images-amazon.com/images/I/814DOyH9h%2BL._SL879_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/814DOyH9h%2BL._SL1500_.jpg'],
+  ['https://images-na.ssl-images-amazon.com/images/I/71sowYLPYPL._SL879_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/71sowYLPYPL._SL1500_.jpg'],
+]);
+products.push([
+  ['https://images-na.ssl-images-amazon.com/images/I/61U8ScEenhL._SL679_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/61U8ScEenhL._SL1000_.jpg'],
+  ['https://images-na.ssl-images-amazon.com/images/I/61ikAJnULvL._SL679_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/61ikAJnULvL._SL1000_.jpg'],
+  ['https://images-na.ssl-images-amazon.com/images/I/61RrCPRq7mL._SL679_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/61RrCPRq7mL._SL1000_.jpg'],
+  ['https://images-na.ssl-images-amazon.com/images/I/71WJE9YHjaL._SL679_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/71WJE9YHjaL._SL1000_.jpg'],
+  ['https://images-na.ssl-images-amazon.com/images/I/71-oquug6dL._SL679_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/71-oquug6dL._SL1000_.jpg'],
+]);
+products.push([
+  ['https://images-na.ssl-images-amazon.com/images/I/71IIHq-oZrL._SL879_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/71IIHq-oZrL._SL1500_.jpg'],
+  ['https://images-na.ssl-images-amazon.com/images/I/719HGiPBaiL._SL679_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/719HGiPBaiL._SL1000_.jpg'],
+  ['https://images-na.ssl-images-amazon.com/images/I/817yQ06fCZL._SL879_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/817yQ06fCZL._SL1500_.jpg'],
+  ['https://images-na.ssl-images-amazon.com/images/I/61yCGA-izwL._SL679_.jpg', 'https://images-na.ssl-images-amazon.com/images/I/61yCGA-izwL._SL1100_.jpg'],
+]);
 
 module.exports = {
   reviewAverageGenerator,
