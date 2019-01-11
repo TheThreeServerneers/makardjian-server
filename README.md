@@ -73,9 +73,8 @@ Read:
 
 > const getProducts = (productID) => {
 >   return new Promise((resolve, reject) => {
->     const queryString = 'SELECT * FROM products WHERE productID = ?';
->     const params = [productID];
->     db.client.query(queryString, params, (err, res) => {
+>     const queryString = `SELECT * FROM products WHERE productID = ${productID}`;
+>     db.query(queryString, (err, res) => {
 >       if (err) {
 >         reject(err);
 >       } else {

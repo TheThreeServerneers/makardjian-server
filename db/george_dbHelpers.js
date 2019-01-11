@@ -43,8 +43,7 @@ const addPhoto = (photo) => {
 const getProducts = (productID) => {
   return new Promise((resolve, reject) => {
     const queryString = `SELECT * FROM products WHERE productID = ${productID}`;
-    const params = [productID];
-    db.query(queryString, params, (err, res) => {
+    db.query(queryString, (err, res) => {
       if (err) {
         reject(err);
       } else {
