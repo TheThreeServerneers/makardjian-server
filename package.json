@@ -16,8 +16,15 @@
     "seed-photos": "node db/realPhoto_dataGenerator.js",
     "test": "jest --watch --config ./client/src/tests/jest.config.json",
     "docker-start": "node server/server.js & node db/productsTable_dataGenerator.js",
-    "generate-data": "node db/george_dataGenerator.js",
-    "generate-schema": "psql -d product_overview -a -f db/schema.sql"
+    "build-csv": "node db/george_dataGenerator.js",
+    "build-postgres-database": "sudo -u postgres psql -c 'CREATE database product_overview;'",
+    "build-postgres-schema": "psql -d product_overview -a -f db/schema.sql",
+    "populate-postgres": "psql -d product_overview -a -f db/populatePostgre.sql",
+    "populate-mongo-products": "mongoimport -d product_overview -c products --type tsv --file './db/data.csv' --headerline;",
+    "populate-mongo-photos": "mongoimport -d product_overview -c photos --type tsv --file './db/photos.csv' --headerline;",
+    "seed-postgres": "npm run build-postgres-database && npm run build-postgres-schema && npm run populate-postgres",
+    "seed-mongo": "npm run populate-mongo-products && npm run populate-mongo-photos",
+    "seed-databases": "npm run build-csv && npm run seed-postgres && npm run seed-mongo"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -30,6 +37,9 @@
     "faker": "^4.1.0",
     "fs": "0.0.1-security",
     "mini-css-extract-plugin": "^0.5.0",
+    "mongo": "^0.1.0",
+    "mongodb": "^3.1.10",
+    "mongoose": "^5.4.3",
     "mysql": "^2.16.0",
     "node-sass": "^4.11.0",
     "pg": "^7.7.1",

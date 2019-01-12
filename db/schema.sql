@@ -1,3 +1,5 @@
+\c product_overview;
+
 CREATE TABLE products (
 	id bigserial PRIMARY KEY,
 	product_title varchar(255) NOT NULL,

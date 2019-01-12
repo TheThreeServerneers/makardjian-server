@@ -3,3 +3,5 @@ node_modules/
 /client/dist/bundle.js
 /db/data.csv
 /db/photos.csv
+/db/datatest.csv
+/db/photostest.csv
