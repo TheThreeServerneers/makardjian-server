@@ -6,7 +6,7 @@ const dataHelpers = require('./george_dataHelpers.js');
 const csvWriter = fs.createWriteStream(path.join(__dirname, '/data.csv'), { flags: 'w' });
 let i = 1;
 const total = 10000000;
-let arr = ['id', 'product_title', 'vendor_name', 'review_average', 'review_count', 'answered_questions', 'list_price', 'price', 'prime'];
+let arr = ['id', 'product_title', 'vendor_name', 'review_average', 'review_count', 'answered_questions', 'list_price', 'price', 'prime', 'description', 'photo1', 'photo1_zoom', 'photo2', 'photo2_zoom', 'photo3', 'photo3_zoom', 'photo4', 'photo4_zoom', 'photo5', 'photo5_zoom'];
 arr = arr.join('\t') + '\n';
 csvWriter.write(arr);
 const generateProducts = () => {
@@ -26,9 +26,13 @@ const generateProducts = () => {
     for (var key in obj) {
       newArr.push(obj[key]);
     }
+    const product = dataHelpers.products[Math.floor(Math.random() * dataHelpers.products.length)];
+    for (let j = 0; j < product.length; j++) {
+      newArr.push(product[j][0]);
+      newArr.push(product[j][1]);
+    }
     newArr = newArr.join('\t');
     newArr += '\n';
-    
     if (!csvWriter.write(newArr)) {
       return;
     }
@@ -46,44 +50,3 @@ csvWriter.on('drain', () => {
   generateProducts();
 });
 generateProducts();
-
-const secondWriter = fs.createWriteStream(path.join(__dirname, '/photos.csv'), { flags: 'w' });
-let ii = 1;
-let count = 0;
-let thirdArr = ['id', 'main_photo', 'main_url', 'zoom_url', 'product_id'];
-thirdArr = thirdArr.join('\t') + '\n';
-secondWriter.write(thirdArr);
-const generatePhotos = () => {
-  while (ii < total - 1) {
-    const product = dataHelpers.products[Math.floor(Math.random() * dataHelpers.products.length)];
-    for (let j = 0; j < product.length; j++) {
-      const photo = {};
-      photo.photo_id = count + 1;
-      photo.main_photo = j === 0;
-      photo.main_url = product[j][0];
-      photo.zoom_url = product[j][1];
-      photo.product_id = ii;
-      let fourthArr = [];
-      for (var key in photo) {
-        fourthArr.push(photo[key]);
-      }
-      fourthArr = fourthArr.join('\t');
-      fourthArr += '\n';
-      if (!secondWriter.write(fourthArr)) {
-        return;
-      }
-      count++;
-    }
-    if (ii % 10000 === 0) {
-      console.log(ii);
-    }
-    ii++;
-  }
-  secondWriter.end();
-  console.log(count + ' products placed in photos file!');
-};
-secondWriter.on('drain', () => {
-  count++;
-  generatePhotos();
-});
-generatePhotos();

@@ -60,6 +60,7 @@ const getProduct = (req, res) => {
 };
 
 
+
 module.exports = {
   saveProductRecord,
   savePhotoRecord,

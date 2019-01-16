@@ -20,5 +20,5 @@ CREATE TABLE photos (
 	zoom_url varchar(255) NOT NULL,
 	product_id int,
 	main_photo bool NOT NULL,
-	FOREIGN KEY (product_id) REFERENCES products(id)
+	FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
