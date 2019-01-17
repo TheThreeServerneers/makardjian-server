@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
-const db = require('../db/george_postgres_dbHelpers.js');
+const db = require('./controllers/george_postgres_dbHelpers.js');
 
 const app = express();
 const PORT = 4001;
@@ -15,4 +15,7 @@ app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
 
-app.get('/products/:productId', db.getProducts);
+app.get('/products/:productId', db.findProduct);
+app.post('/products/', db.postProduct);
+app.delete('/products/:productId', db.deleteProduct);
+app.patch('/products/:productId', db.updateProduct);

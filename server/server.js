@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
-const db = require('../db/george_mongo_dbHelpers.js');
+const db = require('./controllers/george_mongo_dbHelpers.js');
 
 const app = express();
 const PORT = 4000;
@@ -16,3 +16,6 @@ app.listen(PORT, () => {
 });
 
 app.get('/products/:productId', db.findProduct);
+app.post('/products/', db.postProduct);
+app.delete('/products/:productId', db.deleteProduct);
+app.patch('/products/:productId', db.updateProduct);
