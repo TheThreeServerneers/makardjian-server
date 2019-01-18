@@ -34,6 +34,7 @@ const productsSchema = mongoose.Schema({
 const Products = mongoose.model('products', productsSchema);
 
 const findProduct = (req, res) => {
+  console.log('here');
   Products.find({ id: req.params.productId })
     .then((data) => {
       res.json(data);
