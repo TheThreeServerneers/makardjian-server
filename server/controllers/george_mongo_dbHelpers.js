@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
+const redisClient = require('redis').createClient;
 
-mongoose.connect('mongodb://localhost/product_overview', { useNewUrlParser: true });
+const redis = redisClient(6379, 'localhost');
+mongoose.connect('mongodb://localhost/product_overview', { poolSize: 10, useNewUrlParser: true });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -34,12 +36,20 @@ const productsSchema = mongoose.Schema({
 const Products = mongoose.model('products', productsSchema);
 
 const findProduct = (req, res) => {
-  console.log('here');
-  Products.find({ id: req.params.productId })
-    .then((data) => {
-      res.json(data);
-    })
-    .catch(() => res.status(500));
+  redis.get(req.params.productId, (err, reply) => {
+    if (err) res.status(500);
+    else if (reply) {
+      res.json(reply);
+    } else {
+      Products.find({ id: req.params.productId })
+        .then((data) => {
+          redis.set(req.params.productId, JSON.stringify(data), () => {
+            res.json(data);
+          });
+        })
+        .catch(() => res.status(500));
+    }
+  });
 };
 
 const postProduct = (req, res) => {
@@ -66,10 +76,6 @@ const deleteProduct = (req, res) => {
 
 const updateProduct = (req, res) => {
   const product = req.body;
-  for (let i = 0; i < product.photos.length; i++) {
-    product[`photo${i + 1}`] = product.photos[i][0];
-    product[`photo${i + 1}_zoom`] = product.photos[i][1];
-  }
   Products.update({ id: req.params.productId }, product)
     .then(() => res.sendStatus(204))
     .catch(() => res.sendStatus(500));

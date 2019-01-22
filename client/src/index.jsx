@@ -5,4 +5,4 @@ require('newrelic');
 
 var root1 = document.getElementById('product-overview');
 
-ReactDOM.render(<App/>, root1)
+ReactDOM.render(<App/>, root1);
