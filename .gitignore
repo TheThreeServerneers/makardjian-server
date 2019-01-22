@@ -5,3 +5,5 @@ node_modules/
 /db/photos.csv
 /db/datatest.csv
 /db/photostest.csv
+/newrelic.js
+/newrelic_agent.log
