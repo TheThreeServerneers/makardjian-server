@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const iterations = 1000;
+
 // Logs the Read average time for querying the server with a certain # of requests.
 const ReadDB = async (dbName, port) => {
   let sum = 0;
@@ -20,6 +20,7 @@ const ReadDB = async (dbName, port) => {
 // ReadDB('Mongo', 4000);
 // ReadDB('Postgres', 4001);
 
+const iterations = 10;
 // Logs a Post (insertion) average time for sample restaurants.
 const postDB = async (dbName, port) => {
   let sum = 0;
@@ -73,7 +74,7 @@ const postDB = async (dbName, port) => {
 
 // Log POST averages for both dbs and log the results
 // postDB('Postgres', 4001);
-// postDB('Mongo', 4000);
+postDB('Mongo', 4000);
 
 const deleteDB = async (dbName, port) => {
   let sum = 0;
