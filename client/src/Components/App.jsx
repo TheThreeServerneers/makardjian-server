@@ -20,15 +20,13 @@ class App extends React.Component {
 
   componentDidMount() {
     const productId = window.location.pathname.split('/')[1];
-    console.log(productId);
     this.getProduct(productId);
   }
 
   getProduct(id) {
-    axios.get(`/products/${id}`)
+    axios.get(`http://load-balancer-1-119359177.us-east-2.elb.amazonaws.com/products/${id}`)
       .then((data) => {
-        console.log(data);
-        const parsedDescription = JSON.parse(data.data[0].description);
+        const parsedDescription = data.data[0].description;
         console.log(parsedDescription);
         const mainPhoto = { main_url: data.data[0].photo1, zoom_url: data.data[0].photo1_zoom, main_photo: true };
         const p1 = { main_url: data.data[0].photo2, zoom_url: data.data[0].photo2_zoom, main_photo: false };
@@ -36,13 +34,12 @@ class App extends React.Component {
         const p3 = { main_url: data.data[0].photo4, zoom_url: data.data[0].photo4_zoom, main_photo: false };
         const p4 = { main_url: data.data[0].photo5, zoom_url: data.data[0].photo5_zoom, main_photo: false };
         const photoSideBar = [mainPhoto, p1, p2, p3, p4].filter(photo => photo.main_url);
-        console.log(photoSideBar);
         this.setState({
           mainPhoto,
           highlightedThumbnail: mainPhoto,
           photoSideBar,
           currentProduct: data.data[0],
-          currentDescription: [parsedDescription],
+          currentDescription: parsedDescription,
         });
         console.log(this.state);
       });

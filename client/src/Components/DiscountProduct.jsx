@@ -17,7 +17,7 @@ const DiscountProduct = (props) => {
               </td>
               <td>
                 <span className='mk-text-strike'>
-                  {props.product.list_price}
+                  ${props.product.list_price}
                 </span>
               </td>
             </tr>
@@ -26,7 +26,7 @@ const DiscountProduct = (props) => {
                 Price:
               </td>
               <td className='mk-product-price mk-red-font'>
-                {props.product.price}
+                ${props.product.price}
                 <span className='mk-prime-icon'></span>
               </td>
             </tr>

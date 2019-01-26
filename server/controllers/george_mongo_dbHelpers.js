@@ -39,6 +39,7 @@ const findProduct = (req, res) => {
   redis.get(req.params.productId, (err, reply) => {
     if (err) res.status(500);
     else if (reply) {
+      reply = JSON.parse(reply);
       res.json(reply);
     } else {
       Products.find({ id: req.params.productId })

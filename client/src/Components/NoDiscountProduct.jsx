@@ -11,7 +11,7 @@ const NoDiscountProduct = (props) => {
                     Price:
               </td>
               <td className='mk-red-font mk-product-price'>
-                <span>{props.product.price}</span>
+                <span>${props.product.price}</span>
                 <span className='mk-prime-icon'>
                 </span>
               </td>
@@ -30,7 +30,7 @@ const NoDiscountProduct = (props) => {
                   Price:
             </td>
             <td className='mk-red-font mk-product-price'>
-              <span>{props.product.price}</span>
+              <span>${props.product.price}</span>
             </td>
           </tr>
         </tbody>

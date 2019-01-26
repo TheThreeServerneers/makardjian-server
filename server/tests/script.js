@@ -41,28 +41,28 @@ export default function () {
   if (arr[0] === 'GET') {
     req1 = {
       method: 'GET',
-      url: `http://localhost:4000/${arr[1]}/`,
+      url: `http://load-balancer-1-119359177.us-east-2.elb.amazonaws.com/${arr[1]}/`,
     };
     req2 = {
       method: 'GET',
-      url: `http://localhost:4000/${arr[1]}/style.css`,
+      url: `http://load-balancer-1-119359177.us-east-2.elb.amazonaws.com/${arr[1]}/style.css`,
     };
     req3 = {
       method: 'GET',
-      url: `http://localhost:4000/products/${arr[1]}/`,
+      url: `http://load-balancer-1-119359177.us-east-2.elb.amazonaws.com/products/${arr[1]}/`,
     };
   } else if (arr[0] === 'POST') {
     req1 = {
       method: 'GET',
-      url: `http://localhost:4000/${arr[1]}/`,
+      url: `http://load-balancer-1-119359177.us-east-2.elb.amazonaws.com/${arr[1]}/`,
     };
     req2 = {
       method: 'GET',
-      url: `http://localhost:4000/${arr[1]}/style.css`,
+      url: `http://load-balancer-1-119359177.us-east-2.elb.amazonaws.com/${arr[1]}/style.css`,
     };
     req3 = {
       method: 'POST',
-      url: 'http://localhost:4000/products/',
+      url: 'http://load-balancer-1-119359177.us-east-2.elb.amazonaws.com/products/',
       body: {
         product_title: 'Egg McMuffin Machine',
         vendor_name: 'Eggselent Selection',
@@ -89,15 +89,15 @@ export default function () {
   } else if (arr[0] === 'UPDATE') {
     req1 = {
       method: 'GET',
-      url: `http://localhost:4000/${arr[1]}/`,
+      url: `http://load-balancer-1-119359177.us-east-2.elb.amazonaws.com/${arr[1]}/`,
     };
     req2 = {
       method: 'GET',
-      url: `http://localhost:4000/${arr[1]}/style.css`,  
+      url: `http://load-balancer-1-119359177.us-east-2.elb.amazonaws.com/${arr[1]}/style.css`,  
     };
     req3 = {
       method: 'PATCH',
-      url: `http://localhost:4000/products/${arr[1]}`,
+      url: `http://load-balancer-1-119359177.us-east-2.elb.amazonaws.com/products/${arr[1]}`,
       body: {
         product_title: 'Shoes with a patch!',
         vendor_name: 'The Patchy Company',
@@ -124,15 +124,15 @@ export default function () {
   } else if (arr[0] === 'DELETE') {
     req1 = {
       method: 'GET',
-      url: `http://localhost:4000/${arr[1]}/`,
+      url: `http://load-balancer-1-119359177.us-east-2.elb.amazonaws.com/${arr[1]}/`,
     };
     req2 = {
       method: 'GET',
-      url: `http://localhost:4000/${arr[1]}/style.css`,
+      url: `http://load-balancer-1-119359177.us-east-2.elb.amazonaws.com/${arr[1]}/style.css`,
     };
     req3 = {
       method: 'DELETE',
-      url: `http://localhost:4000/products/${arr[1]}/`,
+      url: `http://load-balancer-1-119359177.us-east-2.elb.amazonaws.com/products/${arr[1]}/`,
     };
   }
   const responses = http.batch([req1, req2, req3]);

@@ -9,7 +9,7 @@ const Description = (props) => {
          return (
             <li>
               <span className='mk-bullet'>
-                {bullet}
+                {bullet.slice(1,bullet.length-1)}
               </span>
             </li>
           )
