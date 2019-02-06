@@ -25,24 +25,23 @@
 ```sh
 npm start
 ```
-
 Runs the app in the development mode.
 Open http://localhost:4000 to view it in the browser.
-
-The page will reload if you make edits.
-You will also see any lint errors in the console.
-
 
 ```sh
 npm run build-csv
 ```
 Runs the seeding script to create and populate a 10MM data point csv file in 'db/data.csv'.
 
+```sh
+npm run populate-mongo-products
+```
+Imports the data.csv file into a Mongo collection titled 'Products'
 
-
-The page will reload if you make edits.
-You will also see any lint errors in the console.
-
+```sh
+npm run seed-mongo
+```
+Runs the two previous scripts (build-csv and populate-mongo-products) to create a csv file and populate to Mongo database
 
 ## Development
 
