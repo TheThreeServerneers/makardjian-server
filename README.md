@@ -23,12 +23,17 @@
   > 'npm run seed-products' (seeds the products table)
   > 'npm run seed-photos' (seeds the photos table)
 
-## Requirements
+## Available Scripts
 
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
+```sh
+npm start
+```
 
-- Node 6.13.0
-- etc
+Runs the app in the development mode.
+Open http://localhost:3000 to view it in the browser.
+
+The page will reload if you make edits.
+You will also see any lint errors in the console.
 
 ## Development
 
