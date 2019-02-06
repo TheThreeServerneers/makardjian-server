@@ -1,12 +1,11 @@
 # Project Name
 
-> SDC Amazon Project
+> Infinite Marketplace - Show Module
 
 ## Related Projects
 
-  - https://github.com/ChampsOfTheSun/reviews-service
-  - https://github.com/ChampsOfTheSun/vrtobar-service
-  - https://github.com/ChampsOfTheSun/jhods16-service
+  - https://github.com/Triforce-Engineering/esey-checkout-service
+  - https://github.com/Triforce-Engineering/Reviews-Service
 
 ## Table of Contents
 
